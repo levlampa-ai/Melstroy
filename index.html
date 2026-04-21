@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AM-AM-ZINO | ULTIMATE RETENTION</title>
+    <title>AM-AM-ZINO | OPTIMIZED BASE</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -38,31 +38,9 @@
         .icon-btn { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 6px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: 0.1s; }
         .icon-btn:active { transform: scale(0.9); background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
 
-        .balance-section { text-align: center; padding: 5px 0; margin-bottom: 5px; }
+        .balance-section { text-align: center; padding: 5px 0; margin-bottom: 10px; }
         .balance-label { font-size: 0.65rem; color: #aaa; letter-spacing: 2px; }
         .balance-amount { font-size: 2.2rem; font-weight: 900; color: #fff; margin-top: 0px; text-shadow: 0 0 15px rgba(255,255,255,0.2); transition: 0.1s; }
-
-        /* --- ИВЕНТЫ (РАБОЧИЕ) --- */
-        .events-panel { display: flex; gap: 8px; margin-bottom: 10px; }
-        .event-card { 
-            flex: 1; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 51, 102, 0.4); 
-            border-radius: 10px; padding: 6px 0; text-align: center; transition: 0.2s; cursor: pointer;
-            box-shadow: inset 0 0 10px rgba(255, 51, 102, 0.1); position: relative; overflow: hidden;
-        }
-        .event-card.gold { border-color: rgba(255, 215, 0, 0.4); box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.1); }
-        .event-title { font-size: 0.55rem; font-weight: 900; color: #ff3366; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
-        .event-card.gold .event-title { color: #ffd700; }
-        .event-time { font-size: 1rem; font-weight: 900; color: #fff; font-variant-numeric: tabular-nums; }
-        
-        /* Состояние Ивента: ГОТОВ (ЖМИ) */
-        @keyframes pulseReady { 0% { transform: scale(1); box-shadow: 0 0 10px #00ff00; } 50% { transform: scale(1.05); box-shadow: 0 0 20px #00ff00; border-color: #00ff00; } 100% { transform: scale(1); box-shadow: 0 0 10px #00ff00; } }
-        .event-ready { animation: pulseReady 1s infinite; background: rgba(0, 255, 0, 0.1); border-color: #00ff00; }
-        .event-ready .event-time { color: #00ff00; }
-
-        /* Состояние Ивента: АКТИВЕН */
-        @keyframes activeEvent { 0% { background: rgba(255, 51, 102, 0.2); } 50% { background: rgba(255, 51, 102, 0.4); } 100% { background: rgba(255, 51, 102, 0.2); } }
-        .event-active { animation: activeEvent 0.5s infinite; border-color: #ff3366; }
-        .event-card.gold.event-active { animation: activeEvent 0.5s infinite; border-color: #ffd700; background: rgba(255, 215, 0, 0.2); }
 
         .mode-selector { display: flex; justify-content: space-between; background: rgba(0,0,0,0.5); border-radius: 12px; padding: 4px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; }
         .mode-btn { flex: 1; background: transparent; border: none; color: #888; padding: 6px 0; font-size: 0.7rem; font-weight: 700; font-family: 'Montserrat'; border-radius: 8px; cursor: pointer; transition: 0.2s; }
@@ -83,7 +61,7 @@
         @keyframes flashStop { 0% { box-shadow: 0 0 0 #fff; } 50% { box-shadow: 0 0 30px #fff; } 100% { box-shadow: 0 0 0 #fff; } }
         .flash { animation: flashStop 0.25s linear; }
         
-        .result-toast { text-align: center; height: 20px; font-weight: 900; color: #fff; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; transition: 0.1s; }
+        .result-toast { text-align: center; height: 40px; font-weight: 900; color: #fff; font-size: 1rem; text-transform: uppercase; margin-bottom: 5px; transition: 0.1s; display: flex; align-items: center; justify-content: center; }
 
         .spin-button-main { width: 100%; background: #fff; color: #000; border: none; padding: 18px; border-radius: 18px; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.1s; margin-bottom: 10px; box-shadow: 0 6px 0 #ccc; position: relative; overflow: hidden; }
         .spin-button-main:active { transform: translateY(6px); box-shadow: 0 0px 0 #ccc; background: #eee; }
@@ -92,12 +70,13 @@
         .controls-section { display: flex; flex-direction: column; gap: 8px; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.05); }
         .bet-title { text-align: center; font-size: 0.75rem; color: #ffd700; font-weight: 900; letter-spacing: 1px; margin-bottom: -5px; }
         .bet-display { background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 4px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        /* Ограничиваем ввод ставки, чтобы не вписывали миллиарды вручную */
         input[type="number"] { background: none; border: none; color: #fff; font-size: 1.6rem; font-weight: 900; width: 100%; text-align: center; font-family: 'Montserrat'; outline: none; }
         .bet-btn-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
         .bet-btn { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 10px 0; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.1s; }
         .bet-btn:active { transform: scale(0.9); background: #fff; color: #000; box-shadow: 0 0 10px #fff; }
 
-        /* --- ЛЕТАЮЩИЙ ЛУТБОКС (ТАПАЛКА) --- */
+        /* --- ЛЕТАЮЩИЙ ЛУТБОКС (НЛО) --- */
         @keyframes floatChest {
             0% { transform: translateX(-100px) translateY(0) rotate(-10deg) scale(1); opacity: 1; }
             25% { transform: translateX(25vw) translateY(-50px) rotate(10deg) scale(1.1); }
@@ -157,17 +136,6 @@
         <div class="balance-amount" id="balanceText"><span id="balance"></span> ₽</div>
     </div>
 
-    <div class="events-panel">
-        <div class="event-card" id="event1" onclick="activateEvent(1)">
-            <div class="event-title">🔥 МУЛЬТИ x3</div>
-            <div class="event-time" id="timer1">00:00</div>
-        </div>
-        <div class="event-card gold" id="event2" onclick="activateEvent(2)">
-            <div class="event-title">💎 ФРИСПИНЫ</div>
-            <div class="event-time" id="timer2">00:00</div>
-        </div>
-    </div>
-
     <div class="mode-selector" id="modeSelector">
         <button class="mode-btn" onclick="setMode(4, this)">4 СЛОТА</button>
         <button class="mode-btn" onclick="setMode(6, this)">6 СЛОТОВ</button>
@@ -183,7 +151,7 @@
     <div class="controls-section">
         <div class="bet-title">ВАША СТАВКА</div>
         <div class="bet-display">
-            <input type="number" id="betAmount" value="100" min="10">
+            <input type="number" id="betAmount" value="100" min="10" max="1000000000000">
         </div>
         <div class="bet-btn-grid">
             <button class="bet-btn" onclick="setBet('min')">MIN</button>
@@ -214,12 +182,20 @@
     let playerLvl = parseInt(localStorage.getItem('playerLvl')) || 1;
     let playerXp = parseInt(localStorage.getItem('playerXp')) || 0;
     
+    // --- ФУНКЦИЯ ДЛЯ ФОРМАТИРОВАНИЯ ОГРОМНЫХ ЧИСЕЛ ---
+    function formatNumber(num) {
+        if (num >= 1e12) return (num / 1e12).toFixed(2) + 'T'; // Триллионы
+        if (num >= 1e9) return (num / 1e9).toFixed(2) + 'B'; // Миллиарды
+        if (num >= 1e6) return (num / 1e6).toFixed(2) + 'M'; // Миллионы
+        if (num >= 1e3) return (num / 1e3).toFixed(1) + 'K'; // Тысячи
+        return num.toLocaleString();
+    }
+
     function updateXP(amount) {
         playerXp += amount;
         let xpNeeded = playerLvl * 100;
         
         if (playerXp >= xpNeeded) {
-            // ЛЕВЕЛАП!
             playerLvl++;
             playerXp = playerXp - xpNeeded;
             let levelUpReward = playerLvl * 2500;
@@ -228,101 +204,41 @@
             document.getElementById("app").classList.add("lvl-up-anim");
             setTimeout(() => document.getElementById("app").classList.remove("lvl-up-anim"), 500);
             
-            document.getElementById("resultDisplay").innerHTML = `<span style="color:#00ff00">УРОВЕНЬ ${playerLvl}! +${levelUpReward} ₽</span>`;
-            triggerWinParticles(30); // Мощный фонтан
+            document.getElementById("resultDisplay").innerHTML = `<span style="color:#00ff00">УРОВЕНЬ ${playerLvl}! +${formatNumber(levelUpReward)} ₽</span>`;
+            triggerWinParticles(30); 
         }
 
         localStorage.setItem('playerLvl', playerLvl);
         localStorage.setItem('playerXp', playerXp);
         
         document.getElementById("lvlDisplay").innerText = playerLvl;
-        document.getElementById("xpDisplay").innerText = playerXp;
-        document.getElementById("xpMax").innerText = playerLvl * 100;
+        document.getElementById("xpDisplay").innerText = formatNumber(playerXp);
+        document.getElementById("xpMax").innerText = formatNumber(playerLvl * 100);
         document.getElementById("xpFill").style.width = `${(playerXp / (playerLvl * 100)) * 100}%`;
     }
-    updateXP(0); // Инициализация UI опыта
+    updateXP(0); 
 
-    // --- СИСТЕМА ИВЕНТОВ ---
-    let event1State = { nextReady: parseInt(localStorage.getItem('ev1_ready')) || 0, activeUntil: parseInt(localStorage.getItem('ev1_active')) || 0 };
-    let event2State = { nextReady: parseInt(localStorage.getItem('ev2_ready')) || 0, activeUntil: parseInt(localStorage.getItem('ev2_active')) || 0 };
-
-    function checkEventState(evNum, stateObj, cardId, timerId, cooldownTime, activeTime, readyText, activeText) {
-        let now = Date.now();
-        let card = document.getElementById(cardId);
-        let timerDisplay = document.getElementById(timerId);
-
-        if (now < stateObj.activeUntil) {
-            // ИВЕНТ АКТИВЕН СЕЙЧАС
-            card.className = `event-card ${evNum === 2 ? 'gold' : ''} event-active`;
-            timerDisplay.innerText = formatTime(stateObj.activeUntil - now);
-            return true; // Возвращаем true, если работает бафф
-        } else if (now >= stateObj.nextReady) {
-            // ИВЕНТ ГОТОВ К НАЖАТИЮ
-            card.className = `event-card ${evNum === 2 ? 'gold' : ''} event-ready`;
-            timerDisplay.innerText = readyText;
-            return false;
-        } else {
-            // ИВЕНТ В ПЕРЕЗАРЯДКЕ
-            card.className = `event-card ${evNum === 2 ? 'gold' : ''}`;
-            timerDisplay.innerText = formatTime(stateObj.nextReady - now);
-            return false;
-        }
-    }
-
-    function updateEventsUI() {
-        // Эвент 1: Перезарядка 3 мин, работает 30 сек
-        window.isEvent1Active = checkEventState(1, event1State, 'event1', 'timer1', 3*60*1000, 30*1000, "ЖМИ!", "АКТИВЕН!");
-        // Эвент 2: Перезарядка 60 мин, работает 60 сек
-        window.isEvent2Active = checkEventState(2, event2State, 'event2', 'timer2', 60*60*1000, 60*1000, "ЗАБРАТЬ!", "ФРИСПИНЫ!");
-    }
-    setInterval(updateEventsUI, 1000);
-    updateEventsUI();
-
-    function activateEvent(evNum) {
-        let now = Date.now();
-        if (evNum === 1 && now >= event1State.nextReady) {
-            event1State.activeUntil = now + 30 * 1000; // 30 сек работает
-            event1State.nextReady = now + 3 * 60 * 1000; // 3 мин откат
-            localStorage.setItem('ev1_active', event1State.activeUntil);
-            localStorage.setItem('ev1_ready', event1State.nextReady);
-            updateEventsUI();
-        }
-        if (evNum === 2 && now >= event2State.nextReady) {
-            event2State.activeUntil = now + 60 * 1000; // 60 сек фриспинов
-            event2State.nextReady = now + 60 * 60 * 1000; // 1 час откат
-            localStorage.setItem('ev2_active', event2State.activeUntil);
-            localStorage.setItem('ev2_ready', event2State.nextReady);
-            updateEventsUI();
-        }
-    }
-
-    function formatTime(ms) {
-        let totalSec = Math.floor(ms / 1000); let m = Math.floor((totalSec % 3600) / 60); let s = totalSec % 60;
-        return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-    }
-
-    // --- ЛЕТАЮЩИЙ ЛУТБОКС (ТАПАЛКА) ---
+    // --- ЛЕТАЮЩИЙ ЛУТБОКС (НЛО) ---
     setInterval(() => {
-        if(document.querySelector('.floating-chest')) return; // Если уже летит, ждем
-        if(Math.random() > 0.4) { // 60% шанс заспавнить каждые 15 сек
+        if(document.querySelector('.floating-chest')) return; 
+        if(Math.random() > 0.4) { 
             let chest = document.createElement('div');
             chest.className = 'floating-chest';
-            chest.style.top = (Math.random() * 60 + 10) + '%'; // Случайная высота
+            chest.style.top = (Math.random() * 60 + 10) + '%';
             chest.onclick = function() {
                 let reward = playerLvl * 500;
                 balance += reward;
                 updateUI();
                 chest.remove();
                 
-                // Всплывающий текст награды прямо там, где тапнул
                 let pop = document.createElement('div');
-                pop.innerText = `+${reward} ₽!`;
+                pop.innerText = `+${formatNumber(reward)} ₽!`;
                 pop.style.cssText = `position:fixed; top:${chest.style.top}; left:50vw; color:#00ff00; font-size:2rem; font-weight:bold; z-index:10001; animation: bounceStop 1s forwards; text-shadow: 0 0 10px black;`;
                 document.body.appendChild(pop);
                 setTimeout(()=>pop.remove(), 1000);
             };
             document.body.appendChild(chest);
-            setTimeout(() => chest.remove(), 4000); // Удаляем, если не успел нажать
+            setTimeout(() => chest.remove(), 4000);
         }
     }, 15000);
 
@@ -351,11 +267,28 @@
     }
     renderSlots(currentMode);
 
-    function updateUI() { document.getElementById("balance").innerText = balance.toLocaleString(); localStorage.setItem('melstroyBalik', balance); }
+    function updateUI() { 
+        document.getElementById("balance").innerText = formatNumber(balance); 
+        localStorage.setItem('melstroyBalik', balance); 
+    }
     updateUI();
 
-    function setBet(t) { if(isSpinning) return; if(t==='min') betInput.value=10; if(t==='max') betInput.value=balance; }
-    function changeBet(v) { if(isSpinning) return; let b = parseInt(betInput.value); betInput.value = (v==='x2') ? b*2 : b+v; }
+    function setBet(t) { 
+        if(isSpinning) return; 
+        if(t==='min') betInput.value=10; 
+        if(t==='max') {
+            // Защита от переполнения инпута
+            let maxBet = balance > 1e12 ? 1e12 : balance;
+            betInput.value = maxBet; 
+        }
+    }
+    function changeBet(v) { 
+        if(isSpinning) return; 
+        let b = parseInt(betInput.value) || 0; 
+        let newBet = (v==='x2') ? b*2 : b+v; 
+        if(newBet > 1e12) newBet = 1e12;
+        betInput.value = newBet;
+    }
 
     function toggleMusic() {
         if (!audio.src || audio.src.endsWith(".html")) audio.src = bgTracks[Math.floor(Math.random()*bgTracks.length)];
@@ -375,22 +308,17 @@
         const rand = Math.random();
         let targetSameCount = 0; let multiplier = 0; let msg = ""; let isMegaCheckerboard = false;
 
-        if (rand < 0.02) {
+        // НЕРФ ШАНСОВ (~40% побед вместо 65%)
+        if (rand < 0.01) { // 1% шанс (было 2%)
             multiplier = mode === 4 ? 10 : mode === 6 ? 30 : 100; msg = "ШАХ И МАТ! x" + multiplier; isMegaCheckerboard = true;
-        } else if (rand < 0.12) {
+        } else if (rand < 0.06) { // 5% шанс (было 10%)
             targetSameCount = mode === 4 ? 4 : mode === 6 ? 6 : 8; multiplier = mode === 4 ? 5 : mode === 6 ? 15 : 30; msg = "МЕГА ЗАНОС! x" + multiplier;
-        } else if (rand < 0.35) {
+        } else if (rand < 0.16) { // 10% шанс (было 23%)
             targetSameCount = mode === 4 ? 3 : mode === 6 ? 4 : 6; multiplier = mode === 4 ? 2 : mode === 6 ? 5 : 10; msg = "КРУТО! x" + multiplier;
-        } else if (rand < 0.65) {
+        } else if (rand < 0.40) { // 24% шанс (было 30%)
             targetSameCount = mode === 4 ? 2 : mode === 6 ? 3 : 4; multiplier = mode === 4 ? 1 : mode === 6 ? 1 : 2; msg = "ОКУП! x" + multiplier;
-        } else {
+        } else { // 60% слив (было 35%)
             targetSameCount = mode === 4 ? 1 : mode === 6 ? 2 : 3; multiplier = 0; msg = "МИМО";
-        }
-
-        // Если активен Ивент 1, умножаем базовый выигрыш на 3
-        if (window.isEvent1Active && multiplier > 0) {
-            multiplier *= 3;
-            msg = "🔥 ИВЕНТ x3! 🔥 " + msg;
         }
 
         let board = []; let winSymbolsIndices = [];
@@ -449,18 +377,12 @@
 
     function spinSlots() {
         if (isSpinning) return;
-        let bet = parseInt(betInput.value);
-        if (bet > balance && !window.isEvent2Active) return; // Если не Голд Эра, чекаем баланс
+        let bet = parseInt(betInput.value) || 0;
+        if (bet > balance || bet <= 0) return; 
 
         if (isFirstSpin) { if (!isMusicPlaying) toggleMusic(); isFirstSpin = false; }
 
-        // Снимаем деньги, ТОЛЬКО если не активен Ивент 2 (Фриспины)
-        if (!window.isEvent2Active) {
-            balance -= bet; 
-        } else {
-            document.getElementById("resultDisplay").innerText = "БЕСПЛАТНЫЙ СПИН!";
-        }
-        
+        balance -= bet; 
         updateUI(); isSpinning = true;
         document.getElementById("spinBtn").disabled = true;
         
@@ -500,7 +422,6 @@
         const comboEl = document.getElementById("comboDisplay");
         let finalMultiplier = baseMultiplier;
 
-        // Даем опыт за любую крутку
         updateXP(10 + (baseMultiplier * 5));
 
         if (baseMultiplier > 0) {
@@ -520,7 +441,7 @@
 
         if (win > 0) {
             balance += win;
-            res.innerHTML = `<span style="color:#00ff00; text-shadow: 0 0 10px #00ff00;">${msg} (+${win.toLocaleString()})</span>`;
+            res.innerHTML = `<span style="color:#00ff00; text-shadow: 0 0 10px #00ff00;">${msg} (+${formatNumber(win)})</span>`;
             
             triggerWinParticles(finalMultiplier);
 
